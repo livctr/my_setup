@@ -1,0 +1,15 @@
+alias jnbc="jupyter nbconvert --to script"
+
+alias aa='add_alias'
+alias aaf='add_alias_file'
+alias als='see_alias_files'
+alias apwd='get_alias_dir'
+alias apull='git_pull_my_setup'
+alias apush='git_store_my_setup'
+
+
+alias cde='conda deactivate'
+alias cae='conda activate'
+alias cre='conda env remove -n'
+alias pir='pip install -r requirements.txt'
+

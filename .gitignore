@@ -1,0 +1,4 @@
+# Some files I have to keep secret b/c they have sensitive/personal info
+# In these files, I have functions/aliases related to GPUs and navigation, specific to each remote.
+.aliases/bp.aliases
+.aliases/gr.aliases

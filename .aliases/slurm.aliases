@@ -1,0 +1,5 @@
+alias si="sinfo"
+alias sb="sbatch"
+alias sq="squeue -u $USER"
+alias sr="srun"
+alias sa="saccnt -X -j"  # detailed info about a job, ex. "sa 6289"
