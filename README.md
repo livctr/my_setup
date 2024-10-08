@@ -6,7 +6,7 @@ Compute clusters generally consist of **login nodes and compute nodes**. When yo
 Local -- ssh --> login node -- srun --> compute node (NOT USING FOR THIS COURSE)
 ```
 
-Note that I save this folder in the home directory of my remotes as `~/my_setup`.
+Note that I save this folder in the home directory of my remotes as `~/my_setup`. You can copy this using `cd ~ ; git clone https://github.com/livctr/my_setup.git`. You can remove git tracking by removing the `.git` folder inside it.
 
 ### Step 1. VPN
 
