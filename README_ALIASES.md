@@ -2,11 +2,11 @@
 
 Aliases are shorthands for long commands, e.g. commands for requesting GPU, using git, etc.
 
-I created some in `.aliases` in the `my_setup` folder that are useful to me. You can do the same in yours to.
+I created some in `.aliases` in the `my_setup` folder that are useful to me. You can do the same in yours too.
 
 1. Add aliases files (e.g., Github, Slurm, moving around the directory) into an alias folder.
 2. Source them by adding the following to your `.bashrc` folder. It detects if you're on Greene or Bigpurple and sources either `gr.aliases` vs. `bp.aliases`, and everything else. That's all.
-3. Start another terminal (or reload your own? Let me know how if you know this).
+3. Start another terminal (or `source ~/.bashrc`).
 4. Use git or some other sync method to connect them between the two remotes.
 
 ```
