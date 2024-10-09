@@ -1,7 +1,7 @@
 add_alias() {
     # Check if at least two arguments are provided
     if [ $# -lt 2 ]; then
-        echo "Usage: add_alias <alias_name> <command> [file_path]"
+        echo "Usage: add_alias <alias_name> <command> [file_name]"
         return 1
     fi
     
