@@ -13,3 +13,4 @@ alias cae='conda activate'
 alias cre='conda env remove -n'
 alias pir='pip install -r requirements.txt'
 
+alias sing='singularity exec --bind /scratch --nv --overlay  /scratch/vhl2022/overlay-25GB-500K.ext3:rw /scratch/vhl2022/cuda11.8.86-cudnn8.7-devel-ubuntu22.04.2.sif /bin/bash'
