@@ -18,7 +18,7 @@ Before beginning the set up process, see the below workflow for connecting to a 
 2. `gdgpu [# hours]` on the remote. I keep the `gdgpu` function in `.aliases/gr.aliases`, which is `.gitignore`-ed since I have personal configurations in there.
 3. Copy the name of the node I'm allocated (e.g. `grxxx`) and change the `HostName` under `Host (grc)` (see the config file in `README_SSH.md`) to the node's name (I have a program to do this from the command line).
 4. Use VSCode to remote into the compute node.
-5. In the terminal, type `sing` to start Singularity and then `cae [env_name]` to activate the environment.
+5. In the terminal, type `sing` to start Singularity and then `cae [env_name]` to activate the environment. This assumes Singularity and conda are already installed (see `README_REMOTE_ENV.md`).
 
 At the end, you should see `SSH: [compute_node]` in blue in the bottom left of VSCode and be able to connect your Jupyter notebooks directly to the compute node (for larger files, the login nodes will cause the kernels to crash).
 
