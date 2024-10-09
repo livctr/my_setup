@@ -1,4 +1,4 @@
-# Setting up VSCode and `ssh`
+# Setting up `ssh` for VSCode
 
 How to Set Up Greene and Big Purple on VSCode with Windows (WSL)
 
@@ -10,11 +10,46 @@ Key references
 - [ssh setup](https://sites.google.com/nyu.edu/nyu-hpc/accessing-hpc?authuser=0)
 - [HPC Tutorial from DSGA 1011 (set up on the remote side)](https://colab.research.google.com/drive/1v0M4XwEPysR7_EnnyjMGAJlZBjYqqHWh?usp=sharing#scrollTo=gh1SrzRp9LIV)
 
+## Section 1: Workflow for Logging In
+
+Before beginning the set up process, see the below workflow for connecting to a Greene compute node and setting up the environment. If you have a better way, let me know 😊. If you think it can work well for you, you can follow [Section 2](#section-2-guide-for-setting-up) on setting this process up.
+
+1. `ssh greene`
+2. `gdgpu [# hours]` on the remote. I keep the `gdgpu` function in `.aliases/gr.aliases`, which is `.gitignore`-ed since I have personal configurations in there.
+3. Copy the name of the node I'm allocated (e.g. `grxxx`) and change the `HostName` under `Host (grc)` (see the config file in `README_SSH.md`) to the node's name (I have a program to do this from the command line).
+4. Use VSCode to remote into the compute node.
+5. In the terminal, type `sing` to start Singularity and then `cae [env_name]` to activate the environment.
+
+At the end, you should see `SSH: [compute_node]` in blue in the bottom left of VSCode and be able to connect your Jupyter notebooks directly to the compute node (for larger files, the login nodes will cause the kernels to crash).
+
+```bash
+gdgpu() {
+    local gpu_hours=$1
+    local commands=${2:-""}
+
+    # Ensure hours are in a valid range (between 1 and 24 for this example)
+    if ! [[ "$gpu_hours" =~ ^[1-9][0-9]?$ ]] || [ "$gpu_hours" -gt 24 ]; then
+        echo "Error: GPU hours must be between 1 and 24."
+        return 1
+    fi
+
+    # Convert hours to the format required for the --time parameter (HH:MM:SS)
+    time_str=$(printf "%02d:00:00" "$gpu_hours")
+
+    # Run the srun command
+    srun -c8 --gres=gpu:rtx8000:1 --mem=32000 --time=$time_str --pty /bin/bash
+
+}
+```
+
+
+## Section 2: Guide for Setting Up
+
 ### `.ssh` with WSL (skip if you're on Mac)
 On my system, I have two `.ssh` folders. One lives in the Linux directory created by WSL and the other lives on the original Windows directory. Both folders are referred to as `~/.ssh/`, where `~` means the respective "home directories". In the WSL terminal, `~/.ssh` refers to `/home/[user_name_1]/.ssh`, and in the command prompt, `~/.ssh` refers to `C:\Users\[user_name_2]\.ssh`. I will refer to the latter as the **Windows `.ssh` directory**.
 . `user_name_1` and `user_name_2` may or may not be equal depending on the set up. **The latter `~/.ssh` can be referenced by the Linux subsystem at `/mnt/c/Users/[user_name_2]/.ssh`.** Notice the forwards vs. backwards slashes. We want to work with the directory in Windows, **e.g.`~/.ssh` in the command prompt** OR **`/mnt/c/Users/[user_name_2]/.ssh` in the terminal.**
 
-## Files in the `.ssh` directory
+### Files in the `.ssh` directory
 
 The files you'll want to look at are `config` and any public/private key files.
 * `config`: configuration file, important for configuring VSCode
@@ -22,7 +57,7 @@ The files you'll want to look at are `config` and any public/private key files.
 * `known_hosts.old`: don't know, not too important (I think)
 * Other file: for example, `id_rsa` and `id_rsa.pub`. Generally, files without an extension are private keys (sometimes, these have the `.pem` extension) and those with an extension are public keys.
 
-## Set up ssh access from the command prompt (and terminal)
+### Set up ssh access from the command prompt (and terminal)
 
 For those who have read `README.md`, skip step 1.
 1. See [ssh setup](https://sites.google.com/nyu.edu/nyu-hpc/accessing-hpc?authuser=0#h.utvqwwiuouxv).
@@ -36,7 +71,7 @@ For those who have read `README.md`, skip step 1.
 2) Generate the key-pair using `ssh-keygen -t rsa`. Specify the location/name of the key (an identifying name inside the `~/.ssh` folder, e.g. `id_rsa_nyu`) and a password. There should be `id_rsa_nyu` and `id_rsa_nyu.pub` files in the `~/.ssh` folder.
 3) Move the public key to remote. The dumb way (dumb isn't bad! This is also how I do it) is to cat `id_rsa_nyu.pub`, copy it, ssh to your remote, find its `.ssh` folder, and append the key to its authorized keys. A faster way is to do `ssh-copy-id -i ~/.ssh/id_rsa_nyu.pub [username]@[remote]`.
 
-## Set up ssh access from VSCode
+### Set up ssh access from VSCode
 1. [optional] Install WSL. This is if you want to develop locally.
 2. Install VSCode (on the Windows side, this means click on "Download for Windows").
 3. Fill in and append the code below to the config file in your **Windows `.ssh` directory**. Anything in `()` is something you can name, and I show my naming inside the parentheses. Fill in `<>` appropriately. You may need to create the file (`touch`) if it's not there.
