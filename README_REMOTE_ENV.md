@@ -6,6 +6,8 @@ Before you do anything, add `export NYU_NET_ID=<nyu-id>` into your `~/.bashrc` f
 
 ### Section 1: Singularity and conda
 
+NOTE: move the `miniconda3` folder out of `ext3` so that the conda kernels can access the envs
+
 See [DSGA 1011 Google Colab](https://colab.research.google.com/drive/1v0M4XwEPysR7_EnnyjMGAJlZBjYqqHWh?usp=sharing#scrollTo=KkG_1WrS9XA6). This is a good step-by-step guide. Luckily for you, I did this. I believe you can copy-paste the following code into your login terminal on Greene. You may need to change the first line depending on what you can access and if you're on Big Purple.
 
 #### Install Singularity
@@ -31,9 +33,10 @@ singularity exec --bind /scratch --nv --overlay  /scratch/$NYU_NET_ID/overlay-25
 Then, inside singularity, install conda
 
 ```bash
-Singularity> cd /ext3/
+Singularity> mkdir /scratch/$USER/conda
+Singularity> cd /scratch/$USER/conda
 Singularity> wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /ext3/miniconda3
+bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /scratch/$USER/conda/miniconda3
 source /ext3/miniconda3/etc/profile.d/conda.sh
 export PATH=/ext3/miniconda3/bin:$PATH
 ```
@@ -44,6 +47,8 @@ conda create -n nlp_env python==3.9
 conda activate nlp_env
 conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
 ```
+
+For VSCode to be able to detect the conda kernels, also do `conda install ipykernel nb_conda_kernels`. As of 10/10/2024, Python 3.12 is not yet supported.
 
 Test the setup
 ```python
