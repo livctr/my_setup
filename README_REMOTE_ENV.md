@@ -57,7 +57,7 @@ tensor([1, 2])
 ```
 
 ### Section 2: just conda
-1) First, `cd ~`. Typing `pwd` should give something like `gpfs/home/<user_id>`. Please copy this `my_setup` folder to the home directory, or optionally, do a line-by-line install with the code there (I followed miniconda3 installation instructions). Its access should be `~/my_setup`.
+1) First, `cd ~`. Typing `pwd` should give something like `$HOME/<user_id>`. Please copy this `my_setup` folder to the home directory, or optionally, do a line-by-line install with the code there (I followed miniconda3 installation instructions). Its access should be `~/my_setup`.
 1) In the terminal, `cd ~`. Then type `ls -al | grep conda`. If there is a `.conda` file or directory, you'll want to remove it (but first see what it says). For me, there was a warning message about `.conda` taking up memory in the home directory.
 2) Make sure you removed the `.conda` file. Then type `bash my_setup/setup-conda.sh -u <user_id>` in the terminal and press enter.
 3) Open `~/.bashrc` and append the following lines to the bottom:

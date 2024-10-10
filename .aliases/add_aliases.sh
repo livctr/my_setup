@@ -28,6 +28,7 @@ add_alias() {
     # Append the alias to the specified file
     echo "alias $alias_name='$command'" >> "$file_path"
     echo "Alias '$alias_name' added successfully to $file_path."
+    source ~/.bashrc
 }
 
 add_alias_file() {
