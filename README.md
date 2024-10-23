@@ -68,5 +68,5 @@ That's it! That's all there is to `ssh`-ing! However, you'll need to do some ext
 
 For more information, the following links (some may not be available to non-NYU students) are useful:
 1) [Greene HPC](https://sites.google.com/nyu.edu/nyu-hpc/hpc-systems/greene): Very, very useful. I recommend reading this fairly thoroughly. You can use it to understand how to get started, the hardware available, what `dtn` means, what `home` and `scratch` mean, how to run jobs, and how to set up VSCode.
-2) [BigPurple HPC](https://med.nyu.edu/research/scientific-cores-shared-resources/high-performance-computing-core). This is less documented than Greene, but it contains useful information for working with BigPurple.
+2) [BigPurple HPC](https://hpcmed.org/guide/slurm#gpu). Found this to be relevant
 3) [DSGA 1011 HPC Tutorial](https://colab.research.google.com/drive/1v0M4XwEPysR7_EnnyjMGAJlZBjYqqHWh?usp=sharing#scrollTo=KkG_1WrS9XA6): for setting up on your remote side.
