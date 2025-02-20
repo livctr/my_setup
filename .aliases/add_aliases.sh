@@ -42,9 +42,24 @@ add_alias_file() {
     touch "$aliases_dir$1"
 }
 
+edit_alias_file() {
+    local aliases_dir="$HOME/my_setup/.aliases/"
+        if [ $# -ne 1 ]; then
+        echo "Usage: add_alias_file <file_name>"
+        return 1
+    fi
+
+    vim "$aliases_dir/$1"
+}
+
+
 see_alias_files() {
     local aliases_dir="$HOME/my_setup/.aliases/"
     ls -al $aliases_dir
+}
+
+cat_ds_imports() {
+    cat "$HOME/my_setup/utils/ds-imports.txt"
 }
 
 get_alias_dir() {
@@ -74,3 +89,5 @@ git_pull_my_setup() {
     cd ~/my_setup
     git pull
 }
+
+alias ls_aliases='ls ~/my_setup/.aliases'
